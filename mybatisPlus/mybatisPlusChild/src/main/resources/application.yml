@@ -1,0 +1,30 @@
+#开发配置
+spring:
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    # 填写你数据库的url、登录名、密码和数据库名
+    url: jdbc:mysql://localhost:3306/test
+    username: root
+    password: 123456
+
+mybatis-plus:
+  mapper-locations: classpath:/org/child/xml/*Mapper.xml #在src/main/java下的写法(同时配置POM文件中source属性)
+#  mapper-locations: classpath:/mapper/*Mapper.xml #在resource目录下的写法
+  typeAliasesPackage: org.child.entity #实体扫描，多个package用逗号或者分号分隔
+#  typeEnumsPackage: com.baomidou.springboot.entity.enums #枚举字段扫描，支持实体的枚举字段（看官网Spring Boot实例）
+  global-config:
+    db-config:
+      #已经过测试
+      db-type: MYSQL #数据库类型
+      column-underline: false #生成的SQL语句中，字段是否自动加入下划线
+
+      #未经过测试
+      id-type: id_worker #主键类型  0:"数据库ID自增", 1:"用户输入ID",2:"全局唯一ID (数字类型唯一ID)", 3:"全局唯一ID UUID";
+      field-strategy: not_empty #字段策略 0:"忽略判断",1:"非 NULL 判断"),2:"非空判断"
+      capital-mode: true
+      logic-delete-value: 0
+      logic-not-delete-value: 1
+    refresh: true #启动后，修改Target中的XML即可马上更新，用于调试；生产中不要启动
+  configuration:
+    map-underscore-to-camel-case: true
+    cache-enabled: false

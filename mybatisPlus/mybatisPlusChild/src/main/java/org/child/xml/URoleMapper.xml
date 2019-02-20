@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="org.child.mapper.URoleMapper">
+
+    <!-- 通用查询映射结果 -->
+    <resultMap id="BaseResultMap" type="org.child.entity.URole">
+        <id column="id" property="id" />
+        <result column="name" property="name" />
+        <result column="type" property="type" />
+    </resultMap>
+
+	<select id="findRoleByUids" parameterType="java.util.List" resultType="java.lang.String">
+           select name from u_role where id in
+        <foreach collection="list"  item="item" open="(" separator="," close=")">
+                #{item}       
+       </foreach>    
+    </select>
+
+</mapper>
